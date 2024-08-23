@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            height: 100vh;
+            align-items: center;
+            transition: all 0.4s;
+        }
+        .input{
+            visibility: hidden;
+        }
+        .label{
+            position: absolute;
+            width: 80px;
+            height: 40px;
+            border-radius: 20px;
+            background-color: lightgray;
+            cursor: pointer;
+        }
+        .circle{
+            background-color: #fff;
+            width: 34px;
+            height: 34px;
+            top: 3px;
+            left: 3px;
+            border-radius: 50%;
+            position: absolute;
+            animation: toggleoff .4s linear forwards;
+        }
+
+        .input:checked + .label{
+            background-color: white;
+            
+        }
+        .input:checked + .label .circle{
+            
+            animation: toggle .4s linear forwards;
+            background-color: #000;
+            
+        }
+
+        @keyframes toggle {
+
+            0%{
+                transform: translateX(0);
+            }
+
+            100%{
+                transform: translateX(40px);
+                
+            }
+            
+        }
+
+        @keyframes toggleoff {
+
+            0%{
+                transform: translateX(40px);
+            }
+
+            100%{
+                transform: translateX(0);
+                
+            }
+
+        }
+
+    </style>
+</head>
+<body>
+    
+    <input type="checkbox" id="dark" class="input" />
+    <label for="dark" class="label">
+        <div class="circle"></div>
+    </label>
+    <script>
+        const body = document.querySelector('body');
+
+        const input = document.querySelector('.input');
+      
+       input.checked = JSON.parse(localStorage.getItem('mode'))
+       udpatebody();
+        input.addEventListener('click', () => {
+         
+            udpatebody();
+            updatelocal();
+        })
+
+        function udpatebody(){
+            
+                if(input.checked){
+                body.style.backgroundColor = '#333';
+            }
+            else{
+                body.style.backgroundColor = '#fff'
+            }
+        
+        }
+        function updatelocal(){
+            localStorage.setItem('mode', JSON.stringify(input.checked))
+        }
+
+        
+    </script>
+</body>
+</html>

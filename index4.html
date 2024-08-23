@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin:0;
+            display:flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #333;
+            overflow: hidden;
+            height: 100vh;
+        }
+        .image-container{
+            position: relative;
+            width: 200px;
+            height: 200px;
+            transform-style: preserve-3d;
+            transform: perspective(1000px) rotateY(0deg);
+            transition: all 0.7s;
+        }
+        .image-container span{
+            position: absolute;
+            top:0;
+            left: 0;
+            width: 100%;
+            transform: rotateY(calc(var(--i)*45deg)) translateZ(400px);
+        }
+        .btn{
+            background-color: #ccc;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .image-container span img{
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="image-container">
+        <span style="--i:1">
+            <img src="https://picsum.photos/id/36/400/300" alt="" />
+        </span>
+        <span style="--i:2">
+            <img src="https://picsum.photos/id/9/400/300" alt="" />
+        </span>
+        <span style="--i:3">
+            <img src="https://picsum.photos/id/1/400/300" alt="" />
+        </span>
+        <span style="--i:4">
+            <img src="https://picsum.photos/id/20/400/300" alt="" />
+        </span>
+        <span style="--i:5">
+            <img src="https://picsum.photos/id/30/400/300" alt="" />
+        </span>
+        <span style="--i:6">
+            <img src="https://picsum.photos/id/60/400/300" alt="" />
+        </span>
+        <span style="--i:7">
+            <img src="https://picsum.photos/id/55/400/300" alt="" />
+        </span>
+        <span style="--i:8">
+            <img src="https://picsum.photos/id/0/400/300" alt="" />
+        </span>
+    </div>
+
+    <div class="btn-container">
+        <span class="btn" id="prev">Prev</span>
+        <span class="btn" id="next">Next</span>
+    </div>
+
+<script>
+
+const next = document.querySelector('#next');
+const prev = document.querySelector('#prev');
+
+const imageContainer = document.querySelector('.image-container');
+
+
+    let x = 0;
+    let timer;
+
+    prev.addEventListener('click', () => {
+      
+            x = x + 45;
+            clearTimeout(timer);
+        udpateGallery();
+
+    })
+
+    next.addEventListener('click', () => {
+      
+      x = x - 45;
+  clearTimeout(timer);
+      udpateGallery();
+      
+
+})
+
+function udpateGallery(){
+    imageContainer.style.transform = `perspective(1000px) rotateY(${x}deg)`;
+
+    timer = setTimeout(() => {
+        x = x - 45;
+        udpateGallery();
+    }, 3000)
+
+   
+}
+
+udpateGallery();
+
+</script>
+</body>
+</html>

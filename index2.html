@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: blanchedalmond;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- <h2>Jay Swaminarayan</h2> -->
+    </div>
+    
+    <script>
+
+        let slogan = ['Jay Swaminarayan', 'das na das banavshoji', 'tare laine hu', 'Hu to nimit matra', 'bas aek tu raji tha']
+
+      
+        const container = document.querySelector('.container');
+
+        let index = 0;
+        let char = 0;
+
+        updatetext();
+
+        function updatetext(){
+            container.innerHTML = `<h2>${slogan[index].slice(0, char)}</h2>`
+
+            char++;
+
+            if(char > slogan[index].length){
+                index++;
+                char = 0;
+            }
+
+            if(index === slogan.length){
+                index = 0;
+                char = 0;
+            }
+            
+            console.log(char)
+
+            
+            setTimeout(updatetext, 100);
+          
+
+        }
+
+
+       
+
+    </script>
+</body>
+</html>
